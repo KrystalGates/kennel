@@ -2,19 +2,28 @@
   "employees": [
     {
       "id": 1,
-      "name": "Jessica Stevens"
+      "name": "Jessica Stevens",
+      "position": "Manager"
     },
     {
       "id": 2,
-      "name": "Jordan Nelson"
+      "name": "Steven Watkins",
+      "position": "Pet Food Specialist"
     },
     {
       "id": 3,
-      "name": "Zoe LeBlanc"
+      "name": "Zoe LeBlanc",
+      "position": "Groomer"
     },
     {
       "id": 4,
-      "name": "Kelsey Smith"
+      "name": "Kelsey Smith",
+      "position": "Poop Picker Upper"
+    },
+    {
+      "id": 5,
+      "name": "Christi Elvis",
+      "position": "Poop Picker Upper"
     }
   ],
   "locations": [
@@ -32,23 +41,40 @@
   "animals": [
     {
       "id": 1,
-      "name": "Checkers"
+      "name": "Checkers",
+      "employeeId": 3,
+      "ownerId": 1
     },
     {
       "id": 3,
-      "name": "Squeekey"
+      "name": "Squeekey",
+      "employeeId": 5,
+      "ownerId": 4
     },
     {
       "id": 4,
-      "name": "Poodles"
+      "name": "Poodles",
+      "employeeId": 1,
+      "ownerId": 1
     },
     {
       "id": 5,
-      "name": "Derkins"
+      "name": "Derkins",
+      "employeeId": 2,
+      "ownerId": 3
     },
     {
       "id": 6,
-      "name": "Checkers"
+      "name": "Checkers",
+      "employeeId": 4,
+      "ownerId": 1
+    },
+    {
+      "name": "Zoe",
+      "breed": "Blue Heeler",
+      "employeeId": 1,
+      "ownerId": 2,
+      "id": 7
     }
   ],
   "owners": [
@@ -56,6 +82,11 @@
       "id": 1,
       "phoneNumber": 16159874653,
       "name": "Jessica"
+    },
+    {
+      "id": 2,
+      "phoneNumber": 16159874653,
+      "name": "Jennifer"
     },
     {
       "id": 3,
@@ -66,6 +97,11 @@
       "id": 4,
       "phoneNumber": 16153457584,
       "name": "Deli"
+    },
+    {
+      "id": 5,
+      "phoneNumber": 16153462764,
+      "name": "Samantha"
     }
   ]
 }

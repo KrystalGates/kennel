@@ -1,12 +1,14 @@
 import { Route } from "react-router-dom";
 import React, { Component } from "react";
 import { withRouter } from "react-router";
+import ApiManager from "../modules/ApiManager";
 import AnimalList from "./animal/AnimalList";
 import LocationList from "./location/LocationList";
 import EmployeeList from "./employee/EmployeeList";
-import OwnerList from "./owner/OwnerList";
-import ApiManager from "../modules/ApiManager";
 import AnimalDetail from "./animal/AnimalDetail";
+import LocationDetail from "./location/LocationDetail";
+import EmployeeDetail from "./employee/EmployeeDetail";
+import AnimalForm from "./animal/AnimalForm";
 
 class ApplicationViews extends Component {
   state = {
@@ -43,6 +45,7 @@ class ApplicationViews extends Component {
     ApiManager.delete("employees", id)
       .then(ApiManager.all("employees"))
       .then(employees => {
+        this.props.history.push("/employees");
         this.setState({ employees: employees });
       });
 
@@ -54,7 +57,14 @@ class ApplicationViews extends Component {
         this.setState({ owners: owners });
       });
 
-
+  addAnimal = animal =>
+    ApiManager.post(animal)
+      .then(() => ApiManager.all("animals"))
+      .then(animals =>
+        this.setState({
+          animals: animals
+        })
+      );
 
   render() {
     return (
@@ -67,28 +77,25 @@ class ApplicationViews extends Component {
           }}
         />
         <Route
-          exact
-          path="/"
+          path="/locations/:locationId(\d+)"
           render={props => {
-            return <LocationList locations={this.state.locations} />;
+            let location = this.state.locations.find(
+              location =>
+                location.id === parseInt(props.match.params.locationId)
+            );
+            if (!location) {
+              location = { id: 404, name: "404", address: "Not found" };
+            }
+            return <LocationDetail location={location} />;
           }}
         />
         <Route
           exact
           path="/animals"
           render={props => {
-            return <AnimalList animals={this.state.animals} />;
+            return <AnimalList {...props} animals={this.state.animals} />;
           }}
         />
-
-        {/*
-    This is a new route to handle a URL with the following pattern:
-        http://localhost:3000/animals/1
-
-    It will not handle the following URL because the `(\d+)`
-    matches only numbers after the final slash in the URL
-        http://localhost:3000/animals/jack
-*/}
         <Route
           path="/animals/:animalId(\d+)"
           render={props => {
@@ -102,11 +109,25 @@ class ApplicationViews extends Component {
               <AnimalDetail
                 animal={animal}
                 dischargeAnimal={this.deleteAnimal}
+                owners={this.state.owners}
               />
             );
           }}
         />
         <Route
+          path="/animals/new"
+          render={props => {
+            return (
+              <AnimalForm
+              {...props}
+                addAnimal={this.addAnimal}
+                employees={this.state.employees}
+              />
+            );
+          }}
+        />
+        <Route
+          exact
           path="/employees"
           render={props => {
             return (
@@ -118,12 +139,19 @@ class ApplicationViews extends Component {
           }}
         />
         <Route
-          path="/owners"
+          path="/employees/:employeeId(\d+)"
           render={props => {
+            let employee = this.state.employees.find(
+              employee =>
+                employee.id === parseInt(props.match.params.employeeId)
+            );
+            if (!employee) {
+              employee = { id: 404, name: "Employee Not Found" };
+            }
             return (
-              <OwnerList
-                deleteOwner={this.deleteOwner}
-                owners={this.state.owners}
+              <EmployeeDetail
+                employee={employee}
+                deleteEmployee={this.deleteEmployee}
               />
             );
           }}
