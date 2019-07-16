@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./Employee.css"
 
 export default class EmployeeList extends Component {
@@ -11,9 +12,10 @@ export default class EmployeeList extends Component {
                   <div className="card-body">
                       <div className="card-title">
                           <h5>{employee.name}</h5>
-                          <button
+                          <Link className="nav-link" to={`/employees/${employee.id}`}>Position</Link>
+                          {/* <button
                               onClick={() => this.props.deleteEmployee(employee.id)}
-                              className="card-link">Fire Employee</button>
+                              className="card-link">Fire Employee</button> */}
                       </div>
                   </div>
               </div>
