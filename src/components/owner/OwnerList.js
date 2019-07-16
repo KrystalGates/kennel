@@ -12,8 +12,8 @@ export default class OwnerList extends Component {
                             <div className="card-title">
                                 <h5>{owner.name}</h5>
                                 <button
-                                    onClick={() => this.props.deleteFunc("owners", owner.id)}
-                                    className="card-link">Delete</button>
+                                    onClick={() => this.props.deleteOwner(owner.id)}
+                                    className="card-link">Leave Store</button>
                             </div>
                         </div>
                     </div>

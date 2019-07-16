@@ -2,7 +2,7 @@
   "employees": [
     {
       "id": 1,
-      "name": "Jessica Younker"
+      "name": "Jessica Stevens"
     },
     {
       "id": 2,
@@ -14,7 +14,7 @@
     },
     {
       "id": 4,
-      "name": "Blaise Roberts"
+      "name": "Kelsey Smith"
     }
   ],
   "locations": [
@@ -32,15 +32,15 @@
   "animals": [
     {
       "id": 1,
-      "name": "Doodles"
+      "name": "Checkers"
     },
     {
       "id": 3,
-      "name": "Angus"
+      "name": "Squeekey"
     },
     {
       "id": 4,
-      "name": "Henley"
+      "name": "Poodles"
     },
     {
       "id": 5,
@@ -54,13 +54,8 @@
   "owners": [
     {
       "id": 1,
-      "phoneNumber": 16158765423,
+      "phoneNumber": 16159874653,
       "name": "Jessica"
-    },
-    {
-        "id": 2,
-        "phoneNumber": 16159874653,
-        "name": "Ron"
     },
     {
       "id": 3,
