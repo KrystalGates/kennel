@@ -5,6 +5,16 @@ import "./Employee.css"
 export default class EmployeeList extends Component {
   render() {
     return (
+      <React.Fragment>
+      <div className="employeeButton">
+            <button type="button"
+                    className="btn btn-success"
+                    onClick={() => {
+                        this.props.history.push("/employees/new")}
+                    }>
+                Add Employee
+            </button>
+        </div>
       <section className="employees">
       {
           this.props.employees.map(employee =>
@@ -13,15 +23,16 @@ export default class EmployeeList extends Component {
                       <div className="card-title">
                           <h5>{employee.name}</h5>
                           <Link className="nav-link" to={`/employees/${employee.id}`}>Position</Link>
-                          {/* <button
+                          <button
                               onClick={() => this.props.deleteEmployee(employee.id)}
-                              className="card-link">Fire Employee</button> */}
+                              className="card-link">Fire Employee</button>
                       </div>
                   </div>
               </div>
           )
       }
       </section>
+      </React.Fragment>
     );
   }
 }

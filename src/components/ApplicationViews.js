@@ -1,16 +1,21 @@
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import React, { Component } from "react";
 import { withRouter } from "react-router";
 import ApiManager from "../modules/ApiManager";
 import AnimalList from "./animal/AnimalList";
 import LocationList from "./location/LocationList";
 import EmployeeList from "./employee/EmployeeList";
+import OwnerList from "./owner/OwnerList"
 import AnimalDetail from "./animal/AnimalDetail";
 import LocationDetail from "./location/LocationDetail";
 import EmployeeDetail from "./employee/EmployeeDetail";
 import AnimalForm from "./animal/AnimalForm";
+import EmployeeForm from "./employee/EmployeeForm"
+import OwnerForm from "./owner/OwnerForm"
+import Login from './authentication/Login'
 
 class ApplicationViews extends Component {
+
   state = {
     locations: [],
     animals: [],
@@ -32,6 +37,9 @@ class ApplicationViews extends Component {
       .then(owners => (newState.owners = owners))
       .then(() => this.setState(newState));
   }
+
+    // Check if credentials are in local storage
+    isAuthenticated = () => sessionStorage.getItem("credentials") !== null
 
   deleteAnimal = id =>
     ApiManager.delete("animals", id)
@@ -58,11 +66,29 @@ class ApplicationViews extends Component {
       });
 
   addAnimal = animal =>
-    ApiManager.post(animal)
+    ApiManager.post(animal, "animals")
       .then(() => ApiManager.all("animals"))
       .then(animals =>
         this.setState({
           animals: animals
+        })
+      );
+
+  addEmployee = employee =>
+    ApiManager.post(employee, "employees")
+      .then(() => ApiManager.all("employees"))
+      .then(employees =>
+        this.setState({
+          employees: employees
+        })
+      );
+
+  addOwner = owner =>
+    ApiManager.post(owner, "owners")
+      .then(() => ApiManager.all("owners"))
+      .then(owners =>
+        this.setState({
+          owners: owners
         })
       );
 
@@ -126,18 +152,14 @@ class ApplicationViews extends Component {
             );
           }}
         />
-        <Route
-          exact
-          path="/employees"
-          render={props => {
-            return (
-              <EmployeeList
-                deleteEmployee={this.deleteEmployee}
-                employees={this.state.employees}
-              />
-            );
-          }}
-        />
+       <Route exact path="/employees" render={props => {
+    if (this.isAuthenticated()) {
+        return <EmployeeList {...props} deleteEmployee={this.deleteEmployee}
+                             employees={this.state.employees} />
+    } else {
+        return <Redirect to="/login" />
+    }
+}} />
         <Route
           path="/employees/:employeeId(\d+)"
           render={props => {
@@ -156,6 +178,36 @@ class ApplicationViews extends Component {
             );
           }}
         />
+             <Route
+          path="/employees/new"
+          render={props => {
+            return (
+              <EmployeeForm
+              {...props}
+                addEmployee={this.addEmployee}
+              />
+            );
+          }}
+        />
+          <Route
+          exact
+          path="/owners"
+          render={props => {
+            return <OwnerList {...props} owners={this.state.owners} />;
+          }}
+        />
+        <Route
+          path="/owners/new"
+          render={props => {
+            return (
+              <OwnerForm
+              {...props}
+              addOwner={this.addOwner}
+              />
+              );
+            }}
+        />
+            <Route path="/login" component={Login} />
       </React.Fragment>
     );
   }
