@@ -119,7 +119,11 @@ class ApplicationViews extends Component {
           exact
           path="/animals"
           render={props => {
-            return <AnimalList {...props} animals={this.state.animals} />;
+            if(this.isAuthenticated()){
+            return <AnimalList {...props} animals={this.state.animals} />;}
+            else{
+              return <Redirect to="./login" />
+            }
           }}
         />
         <Route
@@ -193,8 +197,11 @@ class ApplicationViews extends Component {
           exact
           path="/owners"
           render={props => {
-            return <OwnerList {...props} owners={this.state.owners} />;
-          }}
+            if (this.isAuthenticated()) {
+            return <OwnerList {...props} owners={this.state.owners} />
+          }else{
+            return <Redirect to="/login" />
+          }}}
         />
         <Route
           path="/owners/new"
