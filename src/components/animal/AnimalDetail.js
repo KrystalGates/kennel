@@ -17,13 +17,14 @@ export default class Animal extends Component {
               {this.props.animal.name}
             </h4>
             <h6 className="card-title">{this.props.animal.breed}</h6>
-            <h5 className="owner">
+            <div className="owner">
+              <h5 className="belongsTo">Owner:</h5>
               {
                 this.props.owners.find(
                   owner => owner.id === this.props.animal.ownerId
                 ).name
               }
-            </h5>
+            </div>
             <button
               onClick={() => {
                 this.setState({ saveDisabled: true }, () =>

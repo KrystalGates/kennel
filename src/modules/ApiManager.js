@@ -27,13 +27,13 @@ export default Object.create(null, {
     }
   },
   post: {
-    value: function(newAnimal){
-        return fetch(`${remoteURL}/animals`, {
+    value: function(newObj, entity){
+        return fetch(`${remoteURL}/${entity}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(newAnimal)
+      body: JSON.stringify(newObj)
     }).then(data => data.json())
   }
 }
