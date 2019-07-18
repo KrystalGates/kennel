@@ -3,25 +3,30 @@
     {
       "id": 2,
       "name": "Steven Watkins",
-      "position": "Pet Food Specialist"
+      "position": "Pet Food Specialist",
+      "locationId": 1
     },
     {
       "id": 3,
       "name": "Zoe LeBlanc",
-      "position": "Groomer"
+      "position": "Groomer",
+      "locationId": 1
     },
     {
       "id": 4,
       "name": "Kelsey Smith",
-      "position": "Poop Picker Upper"
+      "position": "Poop Picker Upper",
+      "locationId": 2
     },
     {
       "id": 5,
       "name": "Christi Elvis",
-      "position": "Poop Picker Upper"
+      "position": "Poop Picker Upper",
+      "locationId": 2
     },
     {
       "name": "Susie VanMurkle",
+      "locationId": 1,
       "id": 6
     }
   ],
@@ -63,8 +68,7 @@
       "id": 6,
       "name": "Checkers",
       "breed": "Blue Heeler",
-      "employeeId": 4,
-      "ownerId": 1
+      "employeeId": 6
     }
   ],
   "owners": [
